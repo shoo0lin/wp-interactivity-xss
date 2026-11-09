@@ -1,0 +1,48 @@
+--- packages/interactivity/src/directives/bind.ts (0ecba295)
++++ packages/interactivity/src/directives/bind.ts (patched)
+@@ -3,6 +3,20 @@
+ import { useInit } from '../utils';
+ import { PENDING_GETTER } from '../proxies/state';
+ import { warnUniqueIdNotSupported } from './utils/warnings';
++
++// URI attributes the server validates (subset of wp_kses_uri_attributes()).
++const URI_ATTRIBUTES = [
++	'action', 'archive', 'background', 'cite', 'classid', 'codebase', 'data',
++	'formaction', 'href', 'icon', 'longdesc', 'manifest', 'poster', 'profile',
++	'src', 'usemap', 'xmlns',
++];
++
++// wp_allowed_protocols() — the server's source of truth.
++const ALLOWED_PROTOCOLS = [
++	'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'irc6', 'ircs',
++	'gopher', 'nntp', 'feed', 'telnet', 'mms', 'rtsp', 'sms', 'svn', 'tel',
++	'fax', 'xmpp', 'webcal', 'urn',
++];
+ 
+ // data-wp-bind--[attribute] binding.
+ directive( 'bind', ( { directives: { bind }, element, evaluate } ) => {
+@@ -78,6 +92,24 @@
+ 			 * present, so we can't remove it.
+ 			 * We follow Preact's logic: https://github.com/preactjs/preact/blob/10.29.1/src/diff/props.js#L138-L150
+ 			 */
++			// Enforce the same URI policy the server applies to static writes
++			// (kses.php: wp_kses_uri_attributes() + wp_allowed_protocols()).
++			// The client previously assigned the evaluated value verbatim, which
++			// re-introduced schemes (e.g. `javascript:`) that the server strips.
++			if (
++				typeof result === 'string' &&
++				URI_ATTRIBUTES.includes( attribute.toLowerCase() )
++			) {
++				const candidate = result.replace( /^[\s\u0000-\u0020]+/, '' );
++				const scheme = /^([a-zA-Z][a-zA-Z0-9+.-]*):/.exec( candidate );
++				if (
++					scheme &&
++					! ALLOWED_PROTOCOLS.includes( scheme[ 1 ].toLowerCase() )
++				) {
++					// Refuse the write; leave the server-rendered value intact.
++					return;
++				}
++			}
+ 			if (
+ 				result !== null &&
+ 				result !== undefined &&
