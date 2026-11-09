@@ -3,15 +3,14 @@
 **A stored XSS in WordPress's Interactivity API — `data-wp-bind--href` — that turns a
 low-privileged Author into an Administrator's hands, and from there into code execution.**
 
-> ## ⚠️ Lab only
-> This repository is a **proof of concept for a local, disposable WordPress lab**.
+> ##
+> This repository is a **proof of concept for a local, disposable WordPress **.
 > Every script targets `127.0.0.1` by default and refuses nothing — it is your job to
 > point it only at systems you own. Do not run any of this against a site you do not
 > have written permission to test. The webshell payload is included because the lab
 > chain writes and restores it; it is not a tool for attacking third parties.
 >
-> No production WordPress instance was contacted while building this. The lab was
-> started with `wp server --allow-root` inside Docker, on loopback.
+
 
 ---
 
